@@ -15,6 +15,15 @@ oscillator.type = "sine";
 oscillator.start();
 gainNode.gain.value = 0;
 
+notenames = new Map();
+mapName.set("C", 261.63);
+mapName.set("D", 293.66);
+mapName.set("E", 329.63);
+mapName.set("F", 349.23);
+mapName.set("G", 392.00);
+mapName.set("A", 440.00);
+mapName.set("B", 493.88);
+
 function frequency(pitch) {
     gainNode.gain.setValueAtTime(100, audioCtx.currentTime);
     oscillator.frequency.setValueAtTime(pitch, audioCtx.currentTime);
@@ -22,8 +31,10 @@ function frequency(pitch) {
 }
 
 function handle() {
+    
     console.log("handled!");
     audioCtx.resume();
     gainNode.gain.value = 0;
-    frequency(input.value);
+    var note = String(input.value);
+    frequency(notenames.get(note)); 
 }
